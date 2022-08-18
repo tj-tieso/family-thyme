@@ -21,6 +21,12 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
+  events: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Event',
+    },
+  ],
   // calendar: [Calendar.schema]
   // family: [User.schema]
   // lists: [List.schema]

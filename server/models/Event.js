@@ -8,6 +8,9 @@ const eventSchema = new Schema({
     trim: true,
     required: 'Please add a title',
   },
+  firstName: {
+    type: String,
+  },
   startDate: {
     type: Date,
     default: Date.now,
