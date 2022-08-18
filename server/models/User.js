@@ -21,7 +21,8 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
-  // TODO: uncomment when List Schema is finished
+  // calendar: [Calendar.schema]
+  // family: [User.schema]
   // lists: [List.schema]
 });
 
