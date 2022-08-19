@@ -72,9 +72,10 @@ const resolvers = {
         const event = await Event.create({
           ...args,
         });
+        console.log(event);
 
-        await User.findByIdAndUpdate(
-          { _id: context.user._id },
+        await User.findOneAndUpdate(
+          { firstName: args.firstName },
           { $push: { events: event._id } },
           { new: true }
         );
@@ -82,6 +83,18 @@ const resolvers = {
         return event;
       }
 
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
+    deleteEvent: async (parent, { _id }, context) => {
+      if (context.user) {
+        const event = await Event.findById({ _id });
+
+        if (event) {
+          return await Event.findOneAndDelete({ _id });
+        }
+        throw new AuthenticationError('No Event with that Id was found!');
+      }
       throw new AuthenticationError('You need to be logged in!');
     },
   },
