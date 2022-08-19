@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 // TODO: move to env
 const secret = 'mysecretsshhhhh';
-const expiration = '2h';
+const expiration = '2d';
 
 // middleware
 module.exports = {
@@ -21,8 +21,8 @@ module.exports = {
     try {
       const { data } = jwt.verify(token, secret, { maxAge: expiration });
       req.user = data;
-    } catch {
-      console.log('Invalid token');
+    } catch (err) {
+      console.log(err);
     }
 
     return req;

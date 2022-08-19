@@ -38,13 +38,16 @@ const resolvers = {
       return User.find().select('-__v -password');
     },
     user: async (parent, { firstName }) => {
-      return User.findOne({ firstName }).select('-__v -password');
+      return User.findOne({ firstName })
+        .select('-__v -password')
+        .populate('events');
     },
   },
   Mutation: {
     addUser: async (parent, args) => {
       const user = await User.create(args);
       const token = signToken(user);
+
       return { token, user };
     },
     login: async (parent, { email, password }) => {
@@ -63,10 +66,7 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    addEvent: async (parent, args) => {
-      const event = await Event.create(args);
-      return event;
-    },
+
     addEvent: async (parent, args, context) => {
       if (context.user) {
         const event = await Event.create({
