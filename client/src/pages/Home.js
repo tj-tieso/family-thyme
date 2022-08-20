@@ -1,11 +1,11 @@
 import React from "react";
 // import Navbar from "../components/Navbar";
-// import Upcoming from "../components/Upcoming";
+import Upcoming from "../components/Upcoming";
 // import ToDo from "../components/ToDo";
 // import FamilyList from "../components/FamilyList"
 
 //import SignUp from "../components/SignUp"
-
+//import Calendar from "./Calendar"
 
 
 
@@ -14,9 +14,11 @@ import React from "react";
 
 const Home = () => {
     return (
-      <div className="container">
+      <div >
         <h1>Homepage</h1>
-        
+        <div className="container">
+        <Upcoming />
+        </div>
        
         
         
