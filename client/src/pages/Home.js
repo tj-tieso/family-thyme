@@ -1,8 +1,13 @@
 import React from "react";
-import Navbar from "../components/Navbar";
-import Upcoming from "../components/Upcoming";
-import ToDo from "../components/ToDo";
-import FamilyList from "../components/FamilyList"
+// import Navbar from "../components/Navbar";
+// import Upcoming from "../components/Upcoming";
+// import ToDo from "../components/ToDo";
+// import FamilyList from "../components/FamilyList"
+
+//import SignUp from "../components/SignUp"
+
+
+
 
 
 
@@ -10,10 +15,13 @@ import FamilyList from "../components/FamilyList"
 const Home = () => {
     return (
       <div className="container">
-        <Navbar />
-        <Upcoming />
-        <ToDo />
-        <FamilyList />
+        <h1>Homepage</h1>
+        
+       
+        
+        
+
+      
       </div>
     );
   };
