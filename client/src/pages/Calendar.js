@@ -7,9 +7,11 @@ export default class DemoApp extends React.Component {
 
   render() {
     return (
+
       <FullCalendar
         plugins={[ dayGridPlugin, interactionPlugin ]}
         dateClick={this.handleDateClick}
+        
       />
     )
   }
