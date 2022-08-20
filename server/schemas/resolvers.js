@@ -50,6 +50,17 @@ const resolvers = {
 
       return { token, user };
     },
+
+    updateUser: async (parent, args, context) => {
+      if (context.user) {
+        return await User.findByIdAndUpdate(context.user._id, args, {
+          new: true,
+        });
+      }
+
+      throw new AuthenticationError('Not logged in');
+    },
+
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
@@ -96,6 +107,16 @@ const resolvers = {
         throw new AuthenticationError('No Event with that Id was found!');
       }
       throw new AuthenticationError('You need to be logged in!');
+    },
+
+    updateEvent: async (parent, args, context) => {
+      console.log(args);
+      if (context.user) {
+        return await Event.findByIdAndUpdate(args._id, args, {
+          new: true,
+        });
+      }
+      throw new AuthenticationError('Not logged in');
     },
   },
 };
