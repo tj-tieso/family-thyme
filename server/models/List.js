@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-const itemSchema = require("./Items");
+const itemSchema = require("./Item");
 
 const listSchema = new Schema(
   {
@@ -31,6 +31,6 @@ listSchema.virtual("itemsCount").get(function () {
   return this.items.length;
 });
 
-const List = model("List", listSchema);
+const Lists = model("List", listSchema);
 
-module.exports = List;
+module.exports = Lists;

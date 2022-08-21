@@ -18,18 +18,19 @@ const typeDefs = gql`
     dueDate: Date
   }
 
-  type List {
+  type Lists {
     _id: ID
     listName: String
     createdAt: Date
     username: String
     itemsCount: Int
-    items: [Items]
+    items: [Item]
+  }
 
-  type Items {
+  type Item {
     _id: ID
     itemDescription: String
-    itemCount: Number
+    itemCount: Int
   }
 
   type Auth {
@@ -41,8 +42,8 @@ const typeDefs = gql`
     me: User
     users: [User]
     user(firstName: String!): User
-    lists(username:String): [List]
-    list(_id: ID!): List
+    lists(username: String!): [Lists]
+    list(_id: ID!): Lists
   }
 
   type Mutation {
@@ -54,8 +55,8 @@ const typeDefs = gql`
       startDate: Date!
       dueDate: Date!
     ): Event
-    addList(listName: String!): List
-    addItem(listId: ID!, listName: String!): List
+    addList(listName: String!): Lists
+    addItem(listId: ID!, itemDescription: String!): Lists
   }
 `;
 
