@@ -6,6 +6,7 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import { StoreProvider } from './utils/GlobalState';
 import './App.css';
 
 const httpLink = createHttpLink({
