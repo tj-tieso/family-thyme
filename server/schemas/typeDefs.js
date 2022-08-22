@@ -29,7 +29,7 @@ const typeDefs = gql`
   type Item {
     _id: ID
     itemDescription: String
-    noOfCount: Int
+    itemCount: Int
   }
 
   type Auth {
@@ -56,6 +56,7 @@ const typeDefs = gql`
     ): Event
     addList(listName: String!): Lists
     addItem(listId: ID!, itemDescription: String!, itemCount: Int!): Lists
+    removeItem(itemId: ID!): Lists
   }
 `;
 

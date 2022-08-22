@@ -92,6 +92,7 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
+    // add new list with listName,createdAt with logged in user
     addList: async (parent, args, context) => {
       if (context.user) {
         const list = await List.create({
@@ -113,9 +114,10 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
+    // add Item to the list with itemDescription , itemCount with logged in user
     addItem: async (
       parent,
-      { listId, itemDescription, noOfCount },
+      { listId, itemDescription, itemCount },
       context
     ) => {
       if (context.user) {
@@ -123,7 +125,7 @@ const resolvers = {
           { _id: listId },
           {
             $push: {
-              items: { itemDescription, noOfCount },
+              items: { itemDescription, itemCount },
             },
           },
           { new: true, runValidators: true }
