@@ -7,17 +7,16 @@ export default class DemoApp extends React.Component {
 
   render() {
     return (
-
       <FullCalendar
         plugins={[ dayGridPlugin, interactionPlugin ]}
         dateClick={this.handleDateClick}
-        
+        events={[
+          { title: 'event 1 Kyle', date:'2022-08-24'}
+        ]}
       />
     )
   }
 
-  handleDateClick = (arg) => { // bind with an arrow function
-    alert(arg.dateStr)
-  }
+ 
 
 }
