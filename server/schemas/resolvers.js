@@ -136,6 +136,13 @@ const resolvers = {
 
       throw new AuthenticationError("You need to be logged in!");
     },
+
+    // remove Item from the list with itemDescription , itemCount with logged in user
+
+    removeItem: async (parent, { itemId }, context) => {
+      if (context.user) {
+      }
+    },
   },
 };
 
