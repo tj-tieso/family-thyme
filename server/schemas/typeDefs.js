@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server-express');
+const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
   scalar Date
@@ -18,6 +18,20 @@ const typeDefs = gql`
     dueDate: Date
   }
 
+  type Lists {
+    _id: ID
+    listName: String
+    createdAt: String
+    itemsCount: Int
+    items: [Item]
+  }
+
+  type Item {
+    _id: ID
+    itemDescription: String
+    noOfCount: Int
+  }
+
   type Auth {
     token: ID!
     user: User
@@ -27,6 +41,8 @@ const typeDefs = gql`
     me: User
     users: [User]
     user(firstName: String!): User
+    lists(firstName: String!): [Lists]
+    list(_id: ID!): Lists
   }
 
   type Mutation {
@@ -46,6 +62,8 @@ const typeDefs = gql`
       startDate: Date!
       dueDate: Date!
     ): Event
+    addList(listName: String!): Lists
+    addItem(listId: ID!, itemDescription: String!, itemCount: Int!): Lists
     
     deleteEvent(_id: ID!): Event
     updateEvent(
