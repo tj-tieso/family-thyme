@@ -7,7 +7,7 @@ const itemSchema = new Schema(
       type: String,
       maxlength: 280,
     },
-    itemCount: {
+    noOfCount: {
       type: Number,
       default: 0,
     },

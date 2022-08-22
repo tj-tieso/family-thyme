@@ -21,8 +21,7 @@ const typeDefs = gql`
   type Lists {
     _id: ID
     listName: String
-    createdAt: Date
-    username: String
+    createdAt: String
     itemsCount: Int
     items: [Item]
   }
@@ -30,7 +29,7 @@ const typeDefs = gql`
   type Item {
     _id: ID
     itemDescription: String
-    itemCount: Int
+    noOfCount: Int
   }
 
   type Auth {
@@ -42,7 +41,7 @@ const typeDefs = gql`
     me: User
     users: [User]
     user(firstName: String!): User
-    lists(username: String!): [Lists]
+    lists(firstName: String!): [Lists]
     list(_id: ID!): Lists
   }
 
@@ -56,7 +55,7 @@ const typeDefs = gql`
       dueDate: Date!
     ): Event
     addList(listName: String!): Lists
-    addItem(listId: ID!, itemDescription: String!): Lists
+    addItem(listId: ID!, itemDescription: String!, itemCount: Int!): Lists
   }
 `;
 

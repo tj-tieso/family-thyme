@@ -96,7 +96,6 @@ const resolvers = {
       if (context.user) {
         const list = await List.create({
           ...args,
-  
         });
         await User.findByIdAndUpdate(
           {
@@ -114,13 +113,17 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
-    addItem: async (parent, { listId, itemDescription }, context) => {
+    addItem: async (
+      parent,
+      { listId, itemDescription, noOfCount },
+      context
+    ) => {
       if (context.user) {
         const updatedList = await List.findOneAndUpdate(
           { _id: listId },
           {
             $push: {
-              items: { itemDescription, username: context.user.username },
+              items: { itemDescription, noOfCount },
             },
           },
           { new: true, runValidators: true }
