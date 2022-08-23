@@ -1,4 +1,4 @@
-const { User, Event, List } = require("../models");
+const { User, Event, List, Item } = require("../models");
 const { GraphQLScalarType, Kind } = require("graphql");
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
@@ -148,6 +148,19 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
+    // remove list with listName,createdAt with logged in user
+
+    removeList: async (parent, { _id }, context) => {
+      if (context.user) {
+        const list = await List.findById({ _id });
+        if (list) {
+          return await List.findOneAndDelete({ _id });
+        }
+        throw new AuthenticationError("No List with that Id was found!");
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+
     // add Item to the list with itemDescription , itemCount with logged in user
     addItem: async (parent, { listId, itemDescription, quantity }, context) => {
       if (context.user) {
@@ -167,17 +180,14 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
-    // remove Item from the list with itemDescription , itemCount
-    removeItem: async (parent, { listId, itemId }, context) => {
+    // remove Item  with itemDescription , itemCount
+    removeItem: async (parent, { _id }, context) => {
       if (context.user) {
-        const item = await List.findByIdAndUpdate(
-          { _id: listId },
-          {
-            $pull: { items: { _id: itemId } },
-          },
-          { new: true }
-        );
-        return updatedList;
+        const item = await Item.findById({ _id });
+        if (item) {
+          return await Item.findOneAndDelete({ _id });
+        }
+        throw new AuthenticationError("No Item with that Id was found!");
       }
       throw new AuthenticationError("You need to be logged in!");
     },

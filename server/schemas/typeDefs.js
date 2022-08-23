@@ -75,8 +75,9 @@ const typeDefs = gql`
     ): Event
 
     addList(listName: String!): Lists
+    removeList(_id: ID!): Lists
     addItem(listId: ID!, itemDescription: String!, quantity: Int!): Lists
-    removeItem(_id: ID!): Lists
+    removeItem(_id: ID!): Item
   }
 `;
 
