@@ -149,7 +149,7 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
-<<<<<<< HEAD
+
     deleteEvent: async (parent, { _id }, context) => {
       if (context.user) {
         const event = await Event.findById({ _id });
@@ -170,14 +170,10 @@ const resolvers = {
         });
       }
       throw new AuthenticationError('Not logged in');
-=======
-    // remove Item from the list with itemDescription , itemCount with logged in user
 
-    removeItem: async (parent, { itemId }, context) => {
-      if (context.user) {
-      }
->>>>>>> feature/removeItem
-    },
+    // remove Item from the list with itemDescription , itemCount with logged in user
+    }
+    
   },
 };
 
