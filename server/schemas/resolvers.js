@@ -65,7 +65,7 @@ const resolvers = {
         });
       }
 
-      throw new AuthenticationError('Not logged in');
+      throw new AuthenticationError("Not logged in");
     },
 
     login: async (parent, { email, password }) => {
@@ -104,6 +104,28 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
+    deleteEvent: async (parent, { _id }, context) => {
+      if (context.user) {
+        const event = await Event.findById({ _id });
+
+        if (event) {
+          return await Event.findOneAndDelete({ _id });
+        }
+        throw new AuthenticationError("No Event with that Id was found!");
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+
+    updateEvent: async (parent, args, context) => {
+      console.log(args);
+      if (context.user) {
+        return await Event.findByIdAndUpdate(args._id, args, {
+          new: true,
+        });
+      }
+      throw new AuthenticationError("Not logged in");
+    },
+
     // add new list with listName,createdAt with logged in user
     addList: async (parent, args, context) => {
       if (context.user) {
@@ -127,17 +149,13 @@ const resolvers = {
     },
 
     // add Item to the list with itemDescription , itemCount with logged in user
-    addItem: async (
-      parent,
-      { listId, itemDescription, itemCount },
-      context
-    ) => {
+    addItem: async (parent, { listId, itemDescription, quantity }, context) => {
       if (context.user) {
         const updatedList = await List.findOneAndUpdate(
           { _id: listId },
           {
             $push: {
-              items: { itemDescription, itemCount },
+              items: { itemDescription, quantity },
             },
           },
           { new: true, runValidators: true }
@@ -149,31 +167,20 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
-
-    deleteEvent: async (parent, { _id }, context) => {
+    // remove Item from the list with itemDescription , itemCount
+    removeItem: async (parent, { listId, itemId }, context) => {
       if (context.user) {
-        const event = await Event.findById({ _id });
-
-        if (event) {
-          return await Event.findOneAndDelete({ _id });
-        }
-        throw new AuthenticationError('No Event with that Id was found!');
+        const item = await List.findByIdAndUpdate(
+          { _id: listId },
+          {
+            $pull: { items: { _id: itemId } },
+          },
+          { new: true }
+        );
+        return updatedList;
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError("You need to be logged in!");
     },
-
-    updateEvent: async (parent, args, context) => {
-      console.log(args);
-      if (context.user) {
-        return await Event.findByIdAndUpdate(args._id, args, {
-          new: true,
-        });
-      }
-      throw new AuthenticationError('Not logged in');
-
-    // remove Item from the list with itemDescription , itemCount with logged in user
-    }
-    
   },
 };
 
