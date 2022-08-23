@@ -49,6 +49,13 @@ const resolvers = {
     list: async (parent, { _id }) => {
       return List.findOne({ _id });
     },
+    events: async (parent, { username }) => {
+      const params = username ? { username } : {};
+      return Event.find(params).sort({ createdAt: -1 });
+    },
+    event: async (parent, { _id }) => {
+      return Event.findOne({ _id });
+    }
   },
   Mutation: {
     addUser: async (parent, args) => {
