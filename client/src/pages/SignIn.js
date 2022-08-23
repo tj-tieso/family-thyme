@@ -8,10 +8,12 @@ import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Auth from '../utils/auth';
+import { useMutation } from '@apollo/react-hooks';
+import { LOGIN } from '../utils/mutations';
 
 function Copyright(props) {
   return (
@@ -44,14 +46,47 @@ const theme = createTheme({
 });
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+  // set initial form state
+  const [userFormData, setUserFormData] = useState({ email: '', password: '' });
+  // set state for form validation
+  const [validated] = useState(false);
+  // set state for alert
+  const [showAlert, setShowAlert] = useState(false);
+  // define mutation for adding a user
+  const [loginUser] = useMutation(LOGIN);
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setUserFormData({ ...userFormData, [name]: value });
   };
+    
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    //const data = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    try {
+      const { data } = await loginUser({
+        variables: { ...userFormData }
+      });
+
+      Auth.login(data.loginUser.token);
+    } catch (err) {
+      console.error(err);
+      setShowAlert(true);
+    }
+
+    setUserFormData({      
+      email: '',
+      password: '',
+    });    
+  };
+
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -77,6 +112,8 @@ export default function SignIn() {
               label="Email Address"
               name="email"
               autoComplete="email"
+              onChange={handleInputChange}
+              value={userFormData.email}
               autoFocus
             />
             <TextField
@@ -87,6 +124,8 @@ export default function SignIn() {
               label="Password"
               type="password"
               id="password"
+              onChange={handleInputChange}
+              value={userFormData.password}
               autoComplete="current-password"
             />
             <FormControlLabel
@@ -94,6 +133,7 @@ export default function SignIn() {
               label="Remember me"
             />
             <Button
+              disabled={!(userFormData.firstName && userFormData.email && userFormData.password)}
               type="submit"
               fullWidth
               variant="contained"
