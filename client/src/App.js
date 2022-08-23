@@ -1,12 +1,11 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
-
-import Home from "./pages/Home";
-import SignUp from "./pages/SignUp";
-import SignIn from"./pages/SignIn";
-import Calendar from "./pages/Calendar"
+import Home from './pages/Home';
+import SignUp from './pages/SignUp';
+import SignIn from './pages/SignIn';
+import Calendar from './pages/Calendar';
+import Navbar from './components/Navbar/index';
 
 import {
   ApolloClient,
@@ -41,17 +40,20 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/calendar" element={<Calendar />} />
-      </Routes>
+        <div>
+          <StoreProvider>
+            <Navbar />
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path='/signup' element={<SignUp />} />
+              <Route path='/signin' element={<SignIn />} />
+              <Route path='/calendar' element={<Calendar />} />
+            </Routes>
+          </StoreProvider>
+        </div>
       </Router>
     </ApolloProvider>
-  )};
-
-
-
+  );
+}
 
 export default App;
