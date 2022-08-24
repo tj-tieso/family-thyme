@@ -64,3 +64,15 @@ export const QUERY_LIST = gql`
     }
   }
 `;
+
+export const QUERY_EVENT = gql`
+  query event($id: ID!) {
+    event(_id: $id) {
+      _id
+      title
+      firstName
+      startDate
+      dueDate
+    }
+  }
+`;
