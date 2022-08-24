@@ -17,9 +17,9 @@ const lists = [
   {
     text: "To-Do-List",
     handleClick: () => {
-      //const text = "To-Do-List";
-      const ToDoItems = ["Pay bills", "call for appointment", "pickup items"];
-      showItems(ToDoItems);
+      const listName = "To-Do-List";
+      //const ToDoItems = ["Pay bills", "call for appointment", "pickup items"];
+      showItems(listName);
     },
   },
   {
@@ -40,35 +40,33 @@ const lists = [
   },
 ];
 
-const showItems = (items) => {
-  
-  //alert(items);
-  return (
-    <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-      <Toolbar />
-      <Typography>To-Do-List</Typography>
-      <List>
-        <ListItem disablePadding>
-          <ListItemIcon>
-            <ListOutlinedIcon />
-          </ListItemIcon>
-          <ListItemText primary="Pay Bills" />
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemIcon>
-            <ListOutlinedIcon />
-          </ListItemIcon>
-          <ListItemText primary="Pickup Order" />
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemIcon>
-            <ListOutlinedIcon />
-          </ListItemIcon>
-          <ListItemText primary="Call for appointment"/>
-        </ListItem>
-      </List>
-    </Box>
-  );
+const showItems = (listName) => {  
+    return (
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <Toolbar />
+        <Typography>To-Do-List</Typography>
+        <List>
+          <ListItem disablePadding>
+            <ListItemIcon>
+              <ListOutlinedIcon />
+            </ListItemIcon>
+            <ListItemText primary="Pay Bills" />
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemIcon>
+              <ListOutlinedIcon />
+            </ListItemIcon>
+            <ListItemText primary="Pickup Order" />
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemIcon>
+              <ListOutlinedIcon />
+            </ListItemIcon>
+            <ListItemText primary="Call for appointment" />
+          </ListItem>
+        </List>
+      </Box>
+    );
 };
 
 const DisplayLists = (items, text) => {
