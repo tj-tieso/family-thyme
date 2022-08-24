@@ -136,7 +136,7 @@ export default function SignIn() {
               label="Remember me"
             />
             <Button
-              disabled={!(userFormData.firstName && userFormData.email && userFormData.password)}
+              disabled={!(userFormData.email && userFormData.password)}
               type="submit"
               fullWidth
               variant="contained"
