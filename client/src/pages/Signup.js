@@ -51,9 +51,9 @@ export default function SignUp() {
   // set initial form state
   const [userFormData, setUserFormData] = useState({ firstName: '', email: '', password: '' });
   // set state for form validation
-  const [validated] = useState(false);
+  //const [validated] = useState(false);
   // set state for alert
-  const [showAlert, setShowAlert] = useState(false);
+  const [setShowAlert] = useState(false);
   // define mutation for adding a user
   const [createUser] = useMutation(ADD_USER);
 
