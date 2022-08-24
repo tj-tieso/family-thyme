@@ -25,18 +25,19 @@ function Calendar() {
     event.preventDefault();
     // const data = new FormData(event.currentTarget);
     const form = event.currentTarget;
-
+    
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
     }
-
+    console.log("this");
     try {
       const { data } = await addEvent({
         variables: { ...eventFormData },
       });
+      console.log("works");
 
-      // Auth.login(data.loginUser.token);
+      Auth.login(data.loginUser.token);
     } catch (err) {
       console.error(err);
       setShowAlert(true);
