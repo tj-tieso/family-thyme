@@ -1,70 +1,76 @@
-# Getting Started with Create React App
+# Family Thyme
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Group Project 3
 
-## Available Scripts
+## Project Description
 
-In the project directory, you can run:
+Family Thyme is a multi-user command center to organize household tasks, grocery lists, and calendars.
 
-### `npm start`
+## Table of Contents
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- [Website](#website)
+- [Usage](#usage)
+- [Technologies](#technologies)
+- [Questions](#questions)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Website
 
-### `npm test`
+Follow [this link]() to the deployed application!
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Usage
+To assist in household management
 
-### `npm run build`
+### User Story
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+As a member of a multi-resident household, I need to coordinate household needs amongst the residents. I use Family Thyme to share my events, see other upcoming events, and create and edit to-do lists.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Accepetance Criteria
+WHEN I am presented with family thyme
+THEN i LOG IN
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+WHEN I click on links in the navigation
+THEN I am taken to the proper page
 
-### `npm run eject`
+WHEN I click on Calendar
+THEN I am able to set or delete an upcoming event
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+WHEN I click on lists
+THEN I am able to add and remove items
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+WHEN I click on list i am brought to list page
+THEN
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+WHEN i click on individual list i am presented with items that were previoysl added to list
+THEN
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+WHEN I see Individual list I am then anble add and delte items from that list
+THNEN
 
-## Learn More
+![image]()
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Technologies
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+This app uses the following technologies:
 
-### Code Splitting
+- [Node](https://nodejs.org/en/)
+- [GraphQL](https://www.npmjs.com/package/graphql)
+- [React](https://reactjs.org/)
+- [Material-ui](https://mui.com/)
+- [MongoDB](https://www.mongodb.com/)
+- [JWT](https://www.npmjs.com/package/jsonwebtoken)
+- [Apollo](https://www.npmjs.com/package/react-apollo)
+- [Mongoose](https://www.npmjs.com/package/mongoose)
+- [Express](https://www.npmjs.com/package/express)
+- [bycrpt](https://www.npmjs.com/package/bcrypt)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Questions
 
-### Analyzing the Bundle Size
+#### Contributors:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Kirti Shelar
+Matthew Grisham
+John Hamilton
+Trevor Tieso
+Kyle Reynolds
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Github: [tj-tieso](https://github.com/tj-tieso)
