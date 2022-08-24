@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -15,25 +16,62 @@ const drawerWidth = 240;
 const lists = [
   {
     text: "To-Do-List",
-    handleClick: () => {}
+    handleClick: () => {
+      //const text = "To-Do-List";
+      const ToDoItems = ["Pay bills", "call for appointment", "pickup items"];
+      showItems(ToDoItems);
+    },
   },
   {
     text: "Shopping-List",
     handleClick: () => {
-      //const ShoppingItems = ["Back-to-school items", "Cloths", "Watch"];
-      // return <div>Hello grocery-list!</div>;
+      //const text = "Shopping-List";
+      const ShoppingItems = ["Back-to-school items", "Cloths", "Watch"];
+      showItems(ShoppingItems);
     },
   },
   {
     text: "Grocery-List",
     handleClick: () => {
-      //const GroceryItems = ["Milk", "Eggs", "Cereals"];
-      //return <div>Hello grocery-list!</div>;
+      const GroceryItems = ["Milk", "Eggs", "Cereals"];
+      //const GroceryItems = "Milk";
+      showItems(GroceryItems);
     },
   },
 ];
 
-const DisplayLists = () => {
+const showItems = (items) => {
+  
+  //alert(items);
+  return (
+    <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Toolbar />
+      <Typography>To-Do-List</Typography>
+      <List>
+        <ListItem disablePadding>
+          <ListItemIcon>
+            <ListOutlinedIcon />
+          </ListItemIcon>
+          <ListItemText primary="Pay Bills" />
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemIcon>
+            <ListOutlinedIcon />
+          </ListItemIcon>
+          <ListItemText primary="Pickup Order" />
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemIcon>
+            <ListOutlinedIcon />
+          </ListItemIcon>
+          <ListItemText primary="Call for appointment"/>
+        </ListItem>
+      </List>
+    </Box>
+  );
+};
+
+const DisplayLists = (items, text) => {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -67,6 +105,7 @@ const DisplayLists = () => {
           </List>
         </Box>
       </Drawer>
+      {showItems()}
     </Box>
   );
 };

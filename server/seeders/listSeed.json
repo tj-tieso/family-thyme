@@ -1,0 +1,56 @@
+[
+  {
+    "listName": "To-Do-List",
+    "firstName": "Kirti",
+    "items": [
+      {
+        "itemDescription": "Pay Bills",
+        "quantity": ""
+      },
+      {
+        "itemDescription": "Call for Appoitnment",
+        "quantity": ""
+      },
+      {
+        "itemDescription": "Pickup order",
+        "quantity": ""
+      }
+    ]
+  },
+  {
+    "listName": "Grocery-List",
+    "firstName": "Kirti",
+    "items": [
+      {
+        "itemDescription": "Milk",
+        "quantity": "1"
+      },
+      {
+        "itemDescription": "Brocoli",
+        "quantity": "2"
+      },
+      {
+        "itemDescription": "Eggs",
+        "quantity": "12"
+      }
+    ]
+  },
+  {
+    "listName": "Shopping-List",
+    "firstName": "Kirti",
+    "items": [
+      {
+        "itemDescription": "Cloths",
+        "quantity": ""
+      },
+      {
+        "itemDescription": "Back-toSchool Supplies",
+        "quantity": ""
+      },
+      {
+        "itemDescription": "Watch",
+        "quantity": ""
+      }
+    ]
+  }
+]

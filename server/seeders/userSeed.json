@@ -1,0 +1,32 @@
+[
+  {
+    "firstName": "Kirti",
+    "email": "kirtis@hotmail.com",
+    "password": "kirti12345",
+    "events": []
+  },
+  {
+    "firstName": "Trevor",
+    "email": "trevor@hotmail.com",
+    "password": "trevor123",
+    "events": []
+  },
+  {
+    "firstName": "John",
+    "email": "john1@hotmail.com",
+    "password": "john123",
+    "events": []
+  },
+  {
+    "firstName": "Kyle",
+    "email": "kyle1@hotmail.com",
+    "password": "kyle123",
+    "events": []
+  },
+  {
+    "firstName": "Matthew",
+    "email": "matt123@hotmail.com",
+    "password": "matt1234",
+    "events": []
+  }
+]
