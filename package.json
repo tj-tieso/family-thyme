@@ -22,5 +22,9 @@
   "devDependencies": {
     "concurrently": "^5.1.0"
   },
-  "homepage": "https://github.com/tj-tieso/family-thyme#readme"
+  "homepage": "https://github.com/tj-tieso/family-thyme#readme",
+  "dependencies": {
+    "@mui/icons-material": "^5.10.2",
+    "dotenv": "^16.0.1"
+  }
 }
