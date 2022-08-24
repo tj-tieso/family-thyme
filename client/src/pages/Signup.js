@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, {useState} from "react";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -8,6 +8,9 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Auth from '../utils/auth';
+import { useMutation } from '@apollo/react-hooks';
+import { ADD_USER } from '../utils/mutations';
 
 function Copyright(props) {
   return (
@@ -45,13 +48,44 @@ const theme = createTheme({
 });
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
+  // set initial form state
+  const [userFormData, setUserFormData] = useState({ firstName: '', email: '', password: '' });
+  // set state for form validation
+  //const [validated] = useState(false);
+  // set state for alert
+  const [setShowAlert] = useState(false);
+  // define mutation for adding a user
+  const [createUser] = useMutation(ADD_USER);
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setUserFormData({ ...userFormData, [name]: value });
+  };
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    //const data = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    try {
+      const { data } = await createUser({
+        variables: { ...userFormData }
+      });
+
+      Auth.login(data.addUser.token);
+    } catch (err) {
+      console.error(err);
+      setShowAlert(true);
+    }
+
+    setUserFormData({
+      firstName: '',
+      email: '',
+      password: '',
+    });    
   };
 
   return (
@@ -84,10 +118,14 @@ export default function SignUp() {
                   fullWidth
                   id="firstName"
                   label="First Name"
+                  onChange={handleInputChange}
+                  value={userFormData.firstName}
                   autoFocus
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+
+             {/* NO LAST NAME IN USER MODEL ASK ON TUESDAY  */}
+              {/* <Grid item xs={12} sm={6}>
                 <TextField
                   required
                   fullWidth
@@ -95,8 +133,9 @@ export default function SignUp() {
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
+                  onChange={handleInputChange}
                 />
-              </Grid>
+              </Grid> */}
               <Grid item xs={12}>
                 <TextField
                   required
@@ -105,6 +144,8 @@ export default function SignUp() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  onChange={handleInputChange}
+                  value={userFormData.email}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -116,10 +157,13 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  onChange={handleInputChange}
+                  value={userFormData.password}
                 />
               </Grid>
             </Grid>
             <Button
+              disabled={!(userFormData.firstName && userFormData.email && userFormData.password)}
               type="submit"
               fullWidth
               variant="contained"

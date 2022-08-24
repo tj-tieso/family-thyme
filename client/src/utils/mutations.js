@@ -14,13 +14,11 @@ export const LOGIN = gql`
 export const ADD_USER = gql`
   mutation addUser(
     $firstName: String!
-    $lastName: String!
     $email: String!
     $password: String!
   ) {
     addUser(
       firstName: $firstName
-      lastName: $lastName
       email: $email
       password: $password
     ) {
@@ -49,6 +47,63 @@ export const ADD_EVENT = gql`
       firstName
       startDate
       dueDate
+    }
+  }
+`;
+
+export const ADD_LIST = gql`
+  mutation addList($listName: String!) {
+    addList(listName: $listName) {
+      _id
+      listName
+      createdAt
+      itemsCount
+      items {
+        _id
+      }
+    }
+  }
+`;
+
+export const REMOVE_LIST = gql`
+  mutation RemoveItem($id: ID!) {
+    removeItem(_id: $id) {
+      _id
+      itemDescription
+    }
+  }
+`;
+
+
+export const ADD_ITEM = gql`
+  mutation addItem($listId: ID!, $itemDescription: String!, $quantity: Int!) {
+    addItem(
+      listId: $listId
+      itemDescription: $itemDescription
+      quantity: $quantity
+    ) {
+      _id
+      itemsCount
+      items {
+        _id
+        itemDescription
+        quantity
+      }
+    }
+  }
+`;
+
+export const REMOVE_ITEM = gql`
+  mutation removeList($id: ID!) {
+    removeList(_id: $id) {
+      _id
+      listName
+      createdAt
+      items {
+        _id
+        itemDescription
+        quantity
+      }
     }
   }
 `;

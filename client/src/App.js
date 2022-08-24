@@ -1,20 +1,21 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import Home from "./pages/Home";
-import SignUp from "./pages/SignUp";
-import SignIn from "./pages/SignIn";
-import Calendar from "./pages/Calendar";
+import Home from './pages/Home';
+import SignUp from './pages/SignUp';
+import SignIn from './pages/SignIn';
+import Calendar from './pages/Calendar';
+import Navbar from './components/Navbar/index';
 
 import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
   createHttpLink,
-} from "@apollo/client";
-// import StoreProvider from "./utils"
-import { setContext } from "@apollo/client/link/context";
-import "./App.css";
+} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+import { StoreProvider } from './utils/GlobalState';
+import './App.css';
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -40,14 +41,15 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <div>
-          {/* <StoreProvider> */}
+          <StoreProvider>
+            <Navbar />
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/signup" element={<SignUp />} />
-              <Route path="/signin" element={<SignIn />} />
-              <Route path="/calendar" element={<Calendar />} />
+              <Route path='/' element={<Home />} />
+              <Route path='/signup' element={<SignUp />} />
+              <Route path='/signin' element={<SignIn />} />
+              <Route path='/calendar' element={<Calendar />} />
             </Routes>
-          {/* </StoreProvider> */}
+          </StoreProvider>
         </div>
       </Router>
     </ApolloProvider>

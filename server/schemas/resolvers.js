@@ -1,4 +1,4 @@
-const { User, Event, List } = require("../models");
+const { User, Event, List, Item } = require("../models");
 const { GraphQLScalarType, Kind } = require("graphql");
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
@@ -59,11 +59,22 @@ const resolvers = {
   },
   Mutation: {
     addUser: async (parent, args) => {
+      console.log(args)
       const user = await User.create(args);
       const token = signToken(user);
-
       return { token, user };
     },
+
+    updateUser: async (parent, args, context) => {
+      if (context.user) {
+        return await User.findByIdAndUpdate(context.user._id, args, {
+          new: true,
+        });
+      }
+
+      throw new AuthenticationError("Not logged in");
+    },
+
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
@@ -86,9 +97,10 @@ const resolvers = {
         const event = await Event.create({
           ...args,
         });
+        console.log(event);
 
-        await User.findByIdAndUpdate(
-          { _id: context.user._id },
+        await User.findOneAndUpdate(
+          { firstName: args.firstName },
           { $push: { events: event._id } },
           { new: true }
         );
@@ -99,6 +111,29 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
+    deleteEvent: async (parent, { _id }, context) => {
+      if (context.user) {
+        const event = await Event.findById({ _id });
+
+        if (event) {
+          return await Event.findOneAndDelete({ _id });
+        }
+        throw new AuthenticationError("No Event with that Id was found!");
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+
+    updateEvent: async (parent, args, context) => {
+      console.log(args);
+      if (context.user) {
+        return await Event.findByIdAndUpdate(args._id, args, {
+          new: true,
+        });
+      }
+      throw new AuthenticationError("Not logged in");
+    },
+
+    // add new list with listName,createdAt with logged in user
     addList: async (parent, args, context) => {
       if (context.user) {
         const list = await List.create({
@@ -120,17 +155,27 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
-    addItem: async (
-      parent,
-      { listId, itemDescription, noOfCount },
-      context
-    ) => {
+    // remove list with listName,createdAt with logged in user
+
+    removeList: async (parent, { _id }, context) => {
+      if (context.user) {
+        const list = await List.findById({ _id });
+        if (list) {
+          return await List.findOneAndDelete({ _id });
+        }
+        throw new AuthenticationError("No List with that Id was found!");
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+
+    // add Item to the list with itemDescription , itemCount with logged in user
+    addItem: async (parent, { listId, itemDescription, quantity }, context) => {
       if (context.user) {
         const updatedList = await List.findOneAndUpdate(
           { _id: listId },
           {
             $push: {
-              items: { itemDescription, noOfCount },
+              items: { itemDescription, quantity },
             },
           },
           { new: true, runValidators: true }
@@ -139,6 +184,18 @@ const resolvers = {
         return updatedList;
       }
 
+      throw new AuthenticationError("You need to be logged in!");
+    },
+
+    // remove Item  with itemDescription , itemCount
+    removeItem: async (parent, { _id }, context) => {
+      if (context.user) {
+        const item = await Item.findById({ _id });
+        if (item) {
+          return await Item.findOneAndDelete({ _id });
+        }
+        throw new AuthenticationError("No Item with that Id was found!");
+      }
       throw new AuthenticationError("You need to be logged in!");
     },
   },

@@ -1,13 +1,12 @@
 const { Schema } = require("mongoose");
 
-
 const itemSchema = new Schema(
   {
     itemDescription: {
       type: String,
       maxlength: 280,
     },
-    noOfCount: {
+    quantity: {
       type: Number,
       default: 0,
     },
