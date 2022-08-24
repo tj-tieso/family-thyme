@@ -24,5 +24,6 @@
   },
   "homepage": "https://github.com/tj-tieso/family-thyme#readme",
   "dependencies": {
+    "@mui/icons-material": "^5.10.2"
   }
 }
