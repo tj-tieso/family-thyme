@@ -30,6 +30,27 @@ export const ADD_USER = gql`
   }
 `;
 
+export const ADD_EVENT = gql`
+  mutation addEvent(
+    $title: String!
+    $firstName: String!
+    $startDate: Date!
+    $dueDate: Date!
+  ) {
+    addEvent(
+      title: $title
+      firstName: $firstName
+      startDate: $startDate
+      dueDate: $dueDate
+    ) {
+      title
+      firstName
+      startDate
+      dueDate
+    }
+  }
+`;
+
 export const ADD_LIST = gql`
   mutation addList($listName: String!) {
     addList(listName: $listName) {

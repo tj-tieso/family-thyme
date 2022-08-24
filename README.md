@@ -15,9 +15,10 @@ Family Thyme is a multi-user command center to organize household tasks, grocery
 
 ## Website
 
-Follow [this link](https://family-thyme.herokuapp.com/) to the deployed application!
+Follow [this link](https://family-thyme-test.herokuapp.com/) to the deployed application!
 
 ## Usage
+
 To assist in household management
 
 ### User Story
@@ -25,6 +26,7 @@ To assist in household management
 As a member of a multi-resident household, I need to coordinate household needs amongst the residents. I use Family Thyme to share my events, see other upcoming events, and create and edit to-do lists.
 
 ### Accepetance Criteria
+
 WHEN I am presented with family thyme
 THEN I LOG IN
 
@@ -37,13 +39,13 @@ THEN I am able to set or delete an upcoming event
 WHEN I click on lists
 THEN I am able to add and remove items
 
-WHEN I click on list 
+WHEN I click on list
 THEN I am brought to list page
 
 WHEN I click on individual list
 THEN I am presented with items that were previosly added to that list
 
-WHEN I see Individual list 
+WHEN I see Individual list
 THEN I am able to add and delte items from that list
 
 ![image]()
