@@ -14,7 +14,6 @@ import HouseIcon from '@mui/icons-material/House';
 import Link from '@mui/material/Link';
 
 import Auth from '../../utils/auth';
-import { BrowserRouter as Router, Link as RouterLink } from 'react-router-dom';
 
 const pages = ['calendar', 'list', 'familylist'];
 
@@ -32,19 +31,14 @@ const ResponsiveAppBar = () => {
     if (!Auth.loggedIn()) {
       return (
         <MenuItem key='signin' onClick={handleCloseNavMenu}>
-          <Link
-            href='/signin'
-            underline='hover'
-            color='inherit'
-            component={RouterLink}
-          >
+          <Link href='/signin' underline='hover' color='inherit'>
             <Button textAlign='center'>Sign In</Button>
           </Link>
         </MenuItem>
       );
     } else {
       <MenuItem key='logout' onClick={() => Auth.logout()}>
-        <Link href='/' underline='hover' component={RouterLink}>
+        <Link href='/' underline='hover'>
           <Button textAlign='center'>Logout</Button>
         </Link>
       </MenuItem>;
@@ -54,7 +48,7 @@ const ResponsiveAppBar = () => {
   const showRegularSignin = () => {
     if (!Auth.loggedIn()) {
       return (
-        <Link href='/signin' component={RouterLink}>
+        <Link href='/signin'>
           <Button
             key='signin'
             onClick={handleCloseNavMenu}
@@ -65,16 +59,18 @@ const ResponsiveAppBar = () => {
         </Link>
       );
     } else {
-      <Link href='/' component={RouterLink}>
-        <Button
-          key='logout'
-          textAlign='center'
-          sx={{ my: 2, color: 'white', display: 'block' }}
-          onClick={() => Auth.logout()}
-        >
-          Logout
-        </Button>
-      </Link>;
+      return (
+        <Link href='/'>
+          <Button
+            key='logout'
+            textAlign='center'
+            sx={{ my: 2, color: 'white', display: 'block' }}
+            onClick={() => Auth.logout()}
+          >
+            Logout
+          </Button>
+        </Link>
+      );
     }
   };
 
@@ -133,11 +129,7 @@ const ResponsiveAppBar = () => {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Link
-                    href={`/${page}`}
-                    underline='hover'
-                    component={RouterLink}
-                  >
+                  <Link href={`/${page}`} underline='hover'>
                     <Button textAlign='center'>{page}</Button>
                   </Link>
                 </MenuItem>
@@ -169,7 +161,7 @@ const ResponsiveAppBar = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Link href={`/${page}`} component={RouterLink}>
+              <Link href={`/${page}`}>
                 <Button
                   key={page}
                   onClick={handleCloseNavMenu}
@@ -179,6 +171,16 @@ const ResponsiveAppBar = () => {
                 </Button>
               </Link>
             ))}
+            {/* <Link href='/'>
+              <Button
+                key='logout'
+                textAlign='center'
+                sx={{ my: 2, color: 'white', display: 'block' }}
+                onClick={() => Auth.logout()}
+              >
+                Logout
+              </Button>
+            </Link> */}
             {showRegularSignin()}
           </Box>
           {/* END REGULAR MENU */}
