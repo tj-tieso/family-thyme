@@ -76,6 +76,7 @@ const typeDefs = gql`
 
     addList(listName: String!): Lists
     removeList(_id: ID!): Lists
+    updateList(_id: ID!, listName: String, createdAt: Date): Lists
     addItem(listId: ID!, itemDescription: String!, quantity: Int!): Lists
     removeItem(_id: ID!): Item
   }
