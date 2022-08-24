@@ -82,7 +82,14 @@ function Calendar() {
         plugins={[dayGridPlugin, interactionPlugin]}
         // dateClick={this.handleDateClick}
         editable={true}
-        events={[{ title: "event 1 Kyle", date: "2022-08-24" }]}
+        events={[{ title: 'Project Due', date: '2022-08-24' },
+        { title: 'Graduation', date: '2022-08-25' },
+        { title: 'Trevors Anniversary', date: '2022-08-24' },
+        { title: 'Apply for Jobs', date: '2022-08-29' },
+        { title: 'PARTY', date: '2022-08-26' },
+        { title: 'LoTR, Rings of Power', date: '2022-09-02' },
+        { title: 'Probably Something', date: '2022-09-05' },
+      ]}
       />
     </div>
   );
