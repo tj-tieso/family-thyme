@@ -52,7 +52,7 @@ const resolvers = {
   },
   Mutation: {
     addUser: async (parent, args) => {
-      console.log(args)
+      console.log(args);
       const user = await User.create(args);
       const token = signToken(user);
       return { token, user };
@@ -161,6 +161,16 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
+    // update list with listName,createdAt with logged in user
+    updateList: async (parent, args, context) => {
+      console.log(args);
+      if (context.user) {
+        return await List.findByIdAndUpdate(args._id, args, {
+          new: true,
+        });
+      }
+      throw new AuthenticationError("Not logged in");
+    },
     // add Item to the list with itemDescription , itemCount with logged in user
     addItem: async (parent, { listId, itemDescription, quantity }, context) => {
       if (context.user) {
