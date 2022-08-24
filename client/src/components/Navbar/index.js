@@ -15,7 +15,7 @@ import Link from '@mui/material/Link';
 
 import Auth from '../../utils/auth';
 
-const pages = ['calendar', 'list', 'familylist'];
+const pages = ['calendar', 'list'];
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -32,16 +32,18 @@ const ResponsiveAppBar = () => {
       return (
         <MenuItem key='signin' onClick={handleCloseNavMenu}>
           <Link href='/signin' underline='hover' color='inherit'>
-            <Button textAlign='center'>Sign In</Button>
+            <Button>Sign In</Button>
           </Link>
         </MenuItem>
       );
     } else {
-      <MenuItem key='logout' onClick={() => Auth.logout()}>
-        <Link href='/' underline='hover'>
-          <Button textAlign='center'>Logout</Button>
-        </Link>
-      </MenuItem>;
+      return (
+        <MenuItem key='logout' onClick={() => Auth.logout()}>
+          <Link href='/' underline='hover'>
+            <Button>Logout</Button>
+          </Link>
+        </MenuItem>
+      );
     }
   };
 
@@ -59,16 +61,17 @@ const ResponsiveAppBar = () => {
         </Link>
       );
     } else {
-      <Link href='/'>
-        <Button
-          key='logout'
-          textAlign='center'
-          sx={{ my: 2, color: 'white', display: 'block' }}
-          onClick={() => Auth.logout()}
-        >
-          Logout
-        </Button>
-      </Link>;
+      return (
+        <Link href='/' key='logout'>
+          <Button
+            key='logout'
+            sx={{ my: 2, color: 'white', display: 'block' }}
+            onClick={() => Auth.logout()}
+          >
+            Logout
+          </Button>
+        </Link>
+      );
     }
   };
 
@@ -128,7 +131,7 @@ const ResponsiveAppBar = () => {
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Link href={`/${page}`} underline='hover'>
-                    <Button textAlign='center'>{page}</Button>
+                    <Button>{page}</Button>
                   </Link>
                 </MenuItem>
               ))}
@@ -159,9 +162,9 @@ const ResponsiveAppBar = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Link href={`/${page}`}>
+              <Link href={`/${page}`} key={page}>
                 <Button
-                  key={page}
+                  // key={page}
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
