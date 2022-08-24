@@ -15,7 +15,7 @@ import Link from '@mui/material/Link';
 
 import Auth from '../../utils/auth';
 
-const pages = ['calendar', 'list', 'familylist'];
+const pages = ['calendar', 'list'];
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -37,11 +37,13 @@ const ResponsiveAppBar = () => {
         </MenuItem>
       );
     } else {
-      <MenuItem key='logout' onClick={() => Auth.logout()}>
-        <Link href='/' underline='hover'>
-          <Button>Logout</Button>
-        </Link>
-      </MenuItem>;
+      return (
+        <MenuItem key='logout' onClick={() => Auth.logout()}>
+          <Link href='/' underline='hover'>
+            <Button>Logout</Button>
+          </Link>
+        </MenuItem>
+      );
     }
   };
 
