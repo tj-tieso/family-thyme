@@ -2,8 +2,10 @@
   "name": "family-client",
   "version": "0.1.0",
   "private": true,
+  "proxy" : "http://localhost:3001",
   "dependencies": {
     "@apollo/client": "^3.3.7",
+    "@apollo/react-hooks": "^4.0.0",
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
     "@fullcalendar/daygrid": "^5.11.2",

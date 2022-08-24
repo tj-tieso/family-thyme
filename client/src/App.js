@@ -1,32 +1,31 @@
-
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-
 import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
-import SignIn from"./pages/SignIn";
-import Calendar from "./pages/Calendar"
+import SignIn from "./pages/SignIn";
+import Calendar from "./pages/Calendar";
 
 import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
   createHttpLink,
-} from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
-import './App.css';
+} from "@apollo/client";
+// import StoreProvider from "./utils"
+import { setContext } from "@apollo/client/link/context";
+import "./App.css";
 
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: "/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('id_token');
+  const token = localStorage.getItem("id_token");
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : '',
+      authorization: token ? `Bearer ${token}` : "",
     },
   };
 });
@@ -40,17 +39,19 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/calendar" element={<Calendar />} />
-      </Routes>
+        <div>
+          {/* <StoreProvider> */}
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/signin" element={<SignIn />} />
+              <Route path="/calendar" element={<Calendar />} />
+            </Routes>
+          {/* </StoreProvider> */}
+        </div>
       </Router>
     </ApolloProvider>
-  )};
-
-
-
+  );
+}
 
 export default App;
