@@ -59,7 +59,7 @@ export default function SignIn() {
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
   };
-    
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     //const data = new FormData(event.currentTarget);
@@ -80,10 +80,10 @@ export default function SignIn() {
       setShowAlert(true);
     }
 
-    setUserFormData({      
+    setUserFormData({
       email: '',
       password: '',
-    });    
+    });
   };
 
 
