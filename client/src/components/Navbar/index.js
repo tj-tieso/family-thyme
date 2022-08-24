@@ -14,6 +14,7 @@ import HouseIcon from '@mui/icons-material/House';
 import Link from '@mui/material/Link';
 
 import Auth from '../../utils/auth';
+import { BrowserRouter as Router, Link as RouterLink } from 'react-router-dom';
 
 const pages = ['calendar', 'list', 'familylist'];
 
@@ -31,14 +32,19 @@ const ResponsiveAppBar = () => {
     if (!Auth.loggedIn()) {
       return (
         <MenuItem key='signin' onClick={handleCloseNavMenu}>
-          <Link href='/signin' underline='hover' color='inherit'>
+          <Link
+            href='/signin'
+            underline='hover'
+            color='inherit'
+            component={RouterLink}
+          >
             <Button textAlign='center'>Sign In</Button>
           </Link>
         </MenuItem>
       );
     } else {
       <MenuItem key='logout' onClick={() => Auth.logout()}>
-        <Link href='/' underline='hover'>
+        <Link href='/' underline='hover' component={RouterLink}>
           <Button textAlign='center'>Logout</Button>
         </Link>
       </MenuItem>;
@@ -48,7 +54,7 @@ const ResponsiveAppBar = () => {
   const showRegularSignin = () => {
     if (!Auth.loggedIn()) {
       return (
-        <Link href='/signin'>
+        <Link href='/signin' component={RouterLink}>
           <Button
             key='signin'
             onClick={handleCloseNavMenu}
@@ -59,7 +65,7 @@ const ResponsiveAppBar = () => {
         </Link>
       );
     } else {
-      <Link href='/'>
+      <Link href='/' component={RouterLink}>
         <Button
           key='logout'
           textAlign='center'
@@ -127,7 +133,11 @@ const ResponsiveAppBar = () => {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Link href={`/${page}`} underline='hover'>
+                  <Link
+                    href={`/${page}`}
+                    underline='hover'
+                    component={RouterLink}
+                  >
                     <Button textAlign='center'>{page}</Button>
                   </Link>
                 </MenuItem>
@@ -159,7 +169,7 @@ const ResponsiveAppBar = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Link href={`/${page}`}>
+              <Link href={`/${page}`} component={RouterLink}>
                 <Button
                   key={page}
                   onClick={handleCloseNavMenu}
