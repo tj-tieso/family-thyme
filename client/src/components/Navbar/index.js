@@ -32,14 +32,14 @@ const ResponsiveAppBar = () => {
       return (
         <MenuItem key='signin' onClick={handleCloseNavMenu}>
           <Link href='/signin' underline='hover' color='inherit'>
-            <Button textAlign='center'>Sign In</Button>
+            <Button>Sign In</Button>
           </Link>
         </MenuItem>
       );
     } else {
       <MenuItem key='logout' onClick={() => Auth.logout()}>
         <Link href='/' underline='hover'>
-          <Button textAlign='center'>Logout</Button>
+          <Button>Logout</Button>
         </Link>
       </MenuItem>;
     }
@@ -60,10 +60,9 @@ const ResponsiveAppBar = () => {
       );
     } else {
       return (
-        <Link href='/'>
+        <Link href='/' key='logout'>
           <Button
             key='logout'
-            textAlign='center'
             sx={{ my: 2, color: 'white', display: 'block' }}
             onClick={() => Auth.logout()}
           >
@@ -130,7 +129,7 @@ const ResponsiveAppBar = () => {
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Link href={`/${page}`} underline='hover'>
-                    <Button textAlign='center'>{page}</Button>
+                    <Button>{page}</Button>
                   </Link>
                 </MenuItem>
               ))}
@@ -161,9 +160,9 @@ const ResponsiveAppBar = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Link href={`/${page}`}>
+              <Link href={`/${page}`} key={page}>
                 <Button
-                  key={page}
+                  // key={page}
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
@@ -171,16 +170,6 @@ const ResponsiveAppBar = () => {
                 </Button>
               </Link>
             ))}
-            {/* <Link href='/'>
-              <Button
-                key='logout'
-                textAlign='center'
-                sx={{ my: 2, color: 'white', display: 'block' }}
-                onClick={() => Auth.logout()}
-              >
-                Logout
-              </Button>
-            </Link> */}
             {showRegularSignin()}
           </Box>
           {/* END REGULAR MENU */}
