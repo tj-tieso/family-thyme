@@ -1,32 +1,33 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Home from './pages/Home';
-import SignUp from './pages/SignUp';
-import SignIn from './pages/SignIn';
-import Calendar from './pages/Calendar';
-import Navbar from './components/Navbar/index';
+import Home from "./pages/Home";
+import SignUp from "./pages/SignUp";
+import SignIn from "./pages/SignIn";
+import Calendar from "./pages/Calendar";
+import Navbar from "./components/Navbar/index";
+import List from "./pages/List";
 
 import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
   createHttpLink,
-} from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
-import { StoreProvider } from './utils/GlobalState';
-import './App.css';
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
+import { StoreProvider } from "./utils/GlobalState";
+import "./App.css";
 
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: "/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('id_token');
+  const token = localStorage.getItem("id_token");
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : '',
+      authorization: token ? `Bearer ${token}` : "",
     },
   };
 });
@@ -44,10 +45,11 @@ function App() {
           <StoreProvider>
             <Navbar />
             <Routes>
-              <Route path='/' element={<Home />} />
-              <Route path='/signup' element={<SignUp />} />
-              <Route path='/signin' element={<SignIn />} />
-              <Route path='/calendar' element={<Calendar />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/signin" element={<SignIn />} />
+              <Route path="/calendar" element={<Calendar />} />
+              <Route path="/list" element={<List />} />
             </Routes>
           </StoreProvider>
         </div>
