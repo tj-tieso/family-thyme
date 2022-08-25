@@ -8,13 +8,15 @@ import Box from '@mui/material/Box';
 
 import { useMutation } from '@apollo/react-hooks';
 import { ADD_EVENT } from '../utils/mutations';
+// import { QUERY_EVENT_LIST } from '../utils/queries';
 import Auth from '../utils/auth';
 
-function Calendar({ events }) {
+function Calendar() {
   const [eventFormData, setEventFormData] = useState({ title: '', date: '' });
   // const [validated] = useState(false);
   const [setShowAlert] = useState(false);
   const [addEvent] = useMutation(ADD_EVENT);
+  // const eventsArr = useQuery(QUERY_EVENT_LIST);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -38,7 +40,9 @@ function Calendar({ events }) {
       });
 
       console.log('works');
-      console.log(eventFormData.title);
+      alert(
+        `${eventFormData.title} on ${eventFormData.date} added to the database!`
+      );
       // Auth.login(data.loginUser.token);
     } catch (err) {
       console.error(err);
@@ -51,36 +55,44 @@ function Calendar({ events }) {
     });
   };
 
+  const showAddEvent = (events) => {
+    if (Auth.loggedIn()) {
+      return (
+        <Box component='form' onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <TextField
+            required
+            id='outlined-multiline-flexible'
+            label='Event Title'
+            name='title'
+            multiline
+            maxRows={4}
+            onChange={handleInputChange}
+            value={eventFormData.title}
+          />
+          <TextField
+            required
+            id='outlined-required'
+            label='Date xxxx-xx-xx'
+            name='date'
+            onChange={handleInputChange}
+            value={eventFormData.date}
+          />
+          <Button
+            type='submit'
+            size='large'
+            variant='contained'
+            sx={{ mt: 1, mb: 6 }}
+          >
+            Add Event
+          </Button>
+        </Box>
+      );
+    }
+  };
+
   return (
     <div>
-      <Box component='form' onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-        <TextField
-          required
-          id='outlined-multiline-flexible'
-          label='Event Title'
-          name='title'
-          multiline
-          maxRows={4}
-          onChange={handleInputChange}
-          value={eventFormData.title}
-        />
-        <TextField
-          required
-          id='outlined-required'
-          label='Date xxxx-xx-xx'
-          name='date'
-          onChange={handleInputChange}
-          value={eventFormData.date}
-        />
-        <Button
-          type='submit'
-          size='large'
-          variant='contained'
-          sx={{ mt: 1, mb: 6 }}
-        >
-          Add Event
-        </Button>
-      </Box>
+      {showAddEvent()}
       <FullCalendar
         plugins={[dayGridPlugin, interactionPlugin]}
         // dateClick={this.handleDateClick}

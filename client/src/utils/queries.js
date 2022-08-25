@@ -70,3 +70,13 @@ export const QUERY_EVENT = gql`
     }
   }
 `;
+
+export const QUERY_EVENT_LIST = gql`
+  query events {
+    events {
+      _id
+      title
+      date
+    }
+  }
+`;
