@@ -3,6 +3,8 @@ const { GraphQLScalarType, Kind } = require('graphql');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 
+// REMOVED Date: dateScalar from resolvers {}
+
 const dateScalar = new GraphQLScalarType({
   name: 'Date',
   description: 'Date custom scalar type',
@@ -55,7 +57,7 @@ const resolvers = {
     },
     event: async (parent, { _id }) => {
       return Event.findOne({ _id });
-    }
+    },
   },
   Mutation: {
     addUser: async (parent, args) => {
@@ -100,7 +102,7 @@ const resolvers = {
         console.log(event);
 
         await User.findOneAndUpdate(
-          { firstName: args.firstName },
+          // { firstName: args.firstName },
           { $push: { events: event._id } },
           { new: true }
         );

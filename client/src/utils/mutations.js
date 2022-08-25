@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
 
 export const LOGIN = gql`
   mutation login($email: String!, $password: String!) {
@@ -12,16 +12,8 @@ export const LOGIN = gql`
 `;
 
 export const ADD_USER = gql`
-  mutation addUser(
-    $firstName: String!
-    $email: String!
-    $password: String!
-  ) {
-    addUser(
-      firstName: $firstName
-      email: $email
-      password: $password
-    ) {
+  mutation addUser($firstName: String!, $email: String!, $password: String!) {
+    addUser(firstName: $firstName, email: $email, password: $password) {
       token
       user {
         _id
@@ -31,22 +23,10 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_EVENT = gql`
-  mutation addEvent(
-    $title: String!
-    $firstName: String!
-    $startDate: Date!
-    $dueDate: Date!
-  ) {
-    addEvent(
-      title: $title
-      firstName: $firstName
-      startDate: $startDate
-      dueDate: $dueDate
-    ) {
+  mutation addEvent($title: String!, $date: String!) {
+    addEvent(title: $title, date: $date) {
       title
-      firstName
-      startDate
-      dueDate
+      date
     }
   }
 `;
@@ -73,7 +53,6 @@ export const REMOVE_LIST = gql`
     }
   }
 `;
-
 
 export const ADD_ITEM = gql`
   mutation addItem($listId: ID!, $itemDescription: String!, $quantity: Int!) {

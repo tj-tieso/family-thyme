@@ -16,11 +16,18 @@ import { useMutation } from '@apollo/react-hooks';
 import { LOGIN } from '../utils/mutations';
 
 
+
+
 function Copyright(props) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+    <Typography
+      variant='body2'
+      color='text.secondary'
+      align='center'
+      {...props}
+    >
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color='inherit' href='https://mui.com/'>
         Family Thyme
       </Link>{' '}
       {new Date().getFullYear()}
@@ -48,7 +55,9 @@ const theme = createTheme({
 
 export default function SignIn() {
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
+
   //const [validated] = useState(false);  
+
   const [login] = useMutation(LOGIN);
 
   const handleChange = (event) => {
@@ -59,7 +68,9 @@ export default function SignIn() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+
     // check if form has everything (as per react-bootstrap docs)
+
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -68,12 +79,16 @@ export default function SignIn() {
 
     try {
       const { data } = await login({
+
         variables: {...userFormData} 
+
       });
 
       Auth.login(data.login.token);
     } catch (err) {
+
       console.error(err);      
+
     }
 
     setUserFormData({
@@ -84,7 +99,7 @@ export default function SignIn() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container component='main' maxWidth='xs'>
         <CssBaseline />
         <Box
           sx={{
@@ -94,55 +109,64 @@ export default function SignIn() {
             alignItems: 'center',
           }}
         >
-          <Typography component="h1" variant="h5">
+          <Typography component='h1' variant='h5'>
             Sign in
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box
+            component='form'
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
+          >
             <TextField
-              margin="normal"
+              margin='normal'
               required
               fullWidth
+
               id="email"
               label="Email Address"
               name="email"
               autoComplete="email"
+
               onChange={handleChange}
               value={userFormData.email}
               autoFocus
             />
             <TextField
-              margin="normal"
+              margin='normal'
               required
               fullWidth
+
               name="password"
               label="Password"
               type="password"
               id="password"
+
               onChange={handleChange}
               value={userFormData.password}
-              autoComplete="current-password"
+              autoComplete='current-password'
             />
             <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
+              control={<Checkbox value='remember' color='primary' />}
+              label='Remember me'
             />
             <Button
               disabled={!(userFormData.email && userFormData.password)}
-              type="submit"
+              type='submit'
               fullWidth
-              variant="contained"
+              variant='contained'
               sx={{ mt: 3, mb: 2 }}
             >
               Sign In
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link href='#' variant='body2'>
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/signup" variant="body2">
+                <Link href='/signup' variant='body2'>
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
