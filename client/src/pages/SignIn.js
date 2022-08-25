@@ -15,6 +15,9 @@ import Auth from '../utils/auth';
 import { useMutation } from '@apollo/react-hooks';
 import { LOGIN } from '../utils/mutations';
 
+
+
+
 function Copyright(props) {
   return (
     <Typography
@@ -52,7 +55,9 @@ const theme = createTheme({
 
 export default function SignIn() {
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
-  //const [validated] = useState(false);
+
+  //const [validated] = useState(false);  
+
   const [login] = useMutation(LOGIN);
 
   const handleChange = (event) => {
@@ -63,7 +68,9 @@ export default function SignIn() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // check if form has everything
+
+    // check if form has everything (as per react-bootstrap docs)
+
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -72,12 +79,16 @@ export default function SignIn() {
 
     try {
       const { data } = await login({
-        variables: { ...userFormData },
+
+        variables: {...userFormData} 
+
       });
 
       Auth.login(data.login.token);
     } catch (err) {
-      console.error(err);
+
+      console.error(err);      
+
     }
 
     setUserFormData({
@@ -111,10 +122,12 @@ export default function SignIn() {
               margin='normal'
               required
               fullWidth
-              id='email'
-              label='Email Address'
-              name='email'
-              autoComplete='email'
+
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+
               onChange={handleChange}
               value={userFormData.email}
               autoFocus
@@ -123,10 +136,12 @@ export default function SignIn() {
               margin='normal'
               required
               fullWidth
-              name='password'
-              label='Password'
-              type='password'
-              id='password'
+
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+
               onChange={handleChange}
               value={userFormData.password}
               autoComplete='current-password'
