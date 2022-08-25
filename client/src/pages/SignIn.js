@@ -16,7 +16,6 @@ import { useMutation } from '@apollo/react-hooks';
 import { LOGIN } from '../utils/mutations';
 
 
-
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -48,23 +47,19 @@ const theme = createTheme({
 });
 
 export default function SignIn() {
-  // set initial form state
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
-  // set state for form validation
-  const [validated] = useState(false);
-  // set state for alert
-  const [showAlert, setShowAlert] = useState(false);
-  // define mutation for adding a user
-  const [loginUser] = useMutation(LOGIN);
+  //const [validated] = useState(false);  
+  const [login] = useMutation(LOGIN);
 
-  const handleInputChange = (event) => {
+  const handleChange = (event) => {
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    //const data = new FormData(event.currentTarget);
+
+    // check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -72,14 +67,13 @@ export default function SignIn() {
     }
 
     try {
-      const { data } = await loginUser({
-        variables: { ...userFormData }
+      const { data } = await login({
+        variables: {...userFormData} 
       });
 
-      Auth.login(data.loginUser.token);
+      Auth.login(data.login.token);
     } catch (err) {
-      console.error(err);
-      setShowAlert(true);
+      console.error(err);      
     }
 
     setUserFormData({
@@ -88,10 +82,7 @@ export default function SignIn() {
     });
   };
 
-
-
   return (
- 
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -115,7 +106,7 @@ export default function SignIn() {
               label="Email Address"
               name="email"
               autoComplete="email"
-              onChange={handleInputChange}
+              onChange={handleChange}
               value={userFormData.email}
               autoFocus
             />
@@ -127,7 +118,7 @@ export default function SignIn() {
               label="Password"
               type="password"
               id="password"
-              onChange={handleInputChange}
+              onChange={handleChange}
               value={userFormData.password}
               autoComplete="current-password"
             />
@@ -161,6 +152,5 @@ export default function SignIn() {
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
-
   );
 }
