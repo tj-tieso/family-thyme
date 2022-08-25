@@ -1,9 +1,9 @@
-// require('dotenv').config();
+require('dotenv').config();
 
 const jwt = require('jsonwebtoken');
 
 // TODO: move to env
-const secret = 'mysecretsshhhhh';
+// const secret = 'mysecretsshhhhh';
 const expiration = '2d';
 
 // middleware
@@ -11,7 +11,7 @@ module.exports = {
   authMiddleware: function ({ req }) {
     let token = req.body.token || req.query.token || req.headers.authorization;
 
-    // ["Bearer", "<tokenvalue>"]
+    // ["Bearer", "<tokenvalue>"]W
     if (req.headers.authorization) {
       token = token.split(' ').pop().trim();
     }
