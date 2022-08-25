@@ -1,5 +1,8 @@
-const { gql } = require("apollo-server-express");
+const { gql } = require('apollo-server-express');
 
+// change all Event Dates to string
+// removed scalar Date from top
+// removed dueDate from addEvent mutation
 const typeDefs = gql`
   scalar Date
 
@@ -13,9 +16,8 @@ const typeDefs = gql`
   type Event {
     _id: ID
     title: String
+    date: String
     firstName: String
-    startDate: Date
-    dueDate: Date
   }
 
   type Lists {
@@ -46,7 +48,7 @@ const typeDefs = gql`
     items: [Item]
     item(_id: ID!): Item
     events: [Event]
-    event(title: String!): Event
+    event(_id: ID!): Event
   }
 
   type Mutation {
@@ -60,21 +62,11 @@ const typeDefs = gql`
       password: String
     ): User
 
-    addEvent(
-      title: String!
-      firstName: String!
-      startDate: Date!
-      dueDate: Date!
-    ): Event
+    addEvent(title: String!, date: String!): Event
 
     deleteEvent(_id: ID!): Event
-    updateEvent(
-      _id: ID!
-      title: String
-      firstName: String
-      startDate: Date
-      dueDate: Date!
-    ): Event
+
+    updateEvent(_id: ID!, title: String, firstName: String, date: String): Event
 
     addList(listName: String!): Lists
     removeList(_id: ID!): Lists
